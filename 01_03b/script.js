@@ -52,6 +52,15 @@ console.log(JSON.stringify(comments, null, 2));
  */
 function generateNestedText(comments, level = 0) {
   let output = "";
+  let indent = '-'.repeat(level + 1) + ' '
+
+  comments.forEach((comment) => {
+    output += indent + comment.text + "\n";
+
+    if (comment.children && comment.children.length > 0) {
+      output += generateNestedText(comment.children, level + 1);
+    }
+  })
 
   return output;
 }
